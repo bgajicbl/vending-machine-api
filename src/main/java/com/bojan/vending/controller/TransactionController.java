@@ -1,5 +1,7 @@
 package com.bojan.vending.controller;
 
+import com.bojan.vending.dto.BuyRequest;
+import com.bojan.vending.dto.BuyResponse;
 import com.bojan.vending.dto.CoinDto;
 import com.bojan.vending.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,8 +36,9 @@ public class TransactionController {
     @Operation(summary = "Buy products", description = "Buy products", tags = { "transaction" })
     @PostMapping("/buy")
     @ResponseStatus(HttpStatus.OK)
-    public void buy(){
-
+    public BuyResponse buy(@NotNull @Valid @RequestBody BuyRequest request, Principal principal){
+        String username = principal != null ? principal.getName() : null;
+        return transactionService.buy(request, username);
     }
 
 }

@@ -4,18 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductDto {
+public class BuyResponse {
 
-    private Integer id;
-
-    @NotEmpty
+    private int deposited;
+    private int totalSpent;
     private String productName;
-    private Integer amountAvailable;
-    private Integer cost;
-    private Long sellerId;
+    private CoinDto change;
+
 }

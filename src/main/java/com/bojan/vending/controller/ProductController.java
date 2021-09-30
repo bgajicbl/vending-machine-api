@@ -43,7 +43,7 @@ public class ProductController {
     @Operation(summary = "Delete a product by ID", description = "Delete a product by ID", tags = { "product" })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable long id){
+    public void deleteProduct(@PathVariable int id){
         productService.deleteProduct(id);
 
     }

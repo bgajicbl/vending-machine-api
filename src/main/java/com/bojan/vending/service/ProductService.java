@@ -8,5 +8,5 @@ public interface ProductService {
 
     ProductDto findProductById(int id);
 
-    void deleteProduct(long id);
+    void deleteProduct(int id);
 }

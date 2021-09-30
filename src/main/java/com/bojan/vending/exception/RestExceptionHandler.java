@@ -44,6 +44,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
+    @ExceptionHandler(AmountNotSufficientException.class)
+    protected ResponseEntity<Object> handleAmountNotSufficientException(
+            AmountNotSufficientException ex) {
+        ApiError apiError = new ApiError(SERVICE_UNAVAILABLE);
+        apiError.setMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {

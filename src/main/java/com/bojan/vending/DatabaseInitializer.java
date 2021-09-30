@@ -39,7 +39,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             "candy bar",
             "water"
     );
-    private final String password = "test";
+    public static final String PASSWORD = "test";
 
     private final UserService userService;
     private final ProductService productService;
@@ -55,7 +55,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
         for (int i = 0; i < usernames.size(); ++i) {
             UserDto user = UserDto.builder()
                     .username(usernames.get(i))
-                    .password(password)
+                    .password(PASSWORD)
                     .deposit(new Random().nextInt(500))
                     .roles(Set.of(userService.findRoleByName(roles.get(i))))
                     .build();
@@ -63,8 +63,8 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
 
             ProductDto product = ProductDto.builder()
                     .productName(products.get(i))
-                    .cost(new Random().nextInt(500))
-                    .amountAvailable(new Random().nextInt(100))
+                    .cost(new Random().nextInt(50))
+                    .amountAvailable(new Random().nextInt(20))
                     .build();
             productService.create(product, usernames.get(i));
 
