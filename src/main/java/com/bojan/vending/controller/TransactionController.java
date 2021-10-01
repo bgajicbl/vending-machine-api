@@ -41,4 +41,13 @@ public class TransactionController {
         return transactionService.buy(request, username);
     }
 
+    @RolesAllowed("BUYER")
+    @Operation(summary = "Reset deposit", description = "Reset deposit", tags = { "transaction" })
+    @PostMapping("/reset")
+    @ResponseStatus(HttpStatus.OK)
+    public CoinDto reset(Principal principal){
+        String username = principal != null ? principal.getName() : null;
+        return transactionService.reset(username);
+    }
+
 }

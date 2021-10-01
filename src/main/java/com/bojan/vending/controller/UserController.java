@@ -31,7 +31,9 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
 
+    @Operation(summary = "User login", description = "User login", tags = { "user" })
     @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> login(@RequestBody @Valid AuthRequest request) {
         try {
             Authentication authenticate = authenticationManager
@@ -41,7 +43,7 @@ public class UserController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
-                    .body("OK");
+                    .body("Logged in!");
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -51,6 +53,7 @@ public class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto register(@NotNull @Valid @RequestBody UserDto userDto) {
+
         return userService.register(userDto);
     }
 

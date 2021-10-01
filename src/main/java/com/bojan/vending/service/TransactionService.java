@@ -8,4 +8,6 @@ public interface TransactionService {
     int deposit(CoinDto coinDto, String username);
 
     BuyResponse buy(BuyRequest request, String username);
+
+    CoinDto reset(String username);
 }

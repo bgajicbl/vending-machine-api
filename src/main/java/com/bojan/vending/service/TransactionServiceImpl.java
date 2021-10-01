@@ -64,6 +64,16 @@ public class TransactionServiceImpl implements TransactionService {
         return response;
     }
 
+    @Override
+    public CoinDto reset(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with username:" + username));
+        CoinDto change = calculateChange(user.getDeposit(), 0);
+        user.setDeposit(0);
+        userRepository.save(user);
+        return change;
+    }
+
     private CoinDto calculateChange(int deposit, int price) {
         CoinDto result = new CoinDto();
         int change = deposit - price;

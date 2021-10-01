@@ -7,10 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CoinMapper {
 
-    private CoinMapper() {
-        throw new IllegalStateException("Utility class");
-    }
-
     public static CoinDto toCoinDto(Coin coin){
         return CoinDto.builder()
                 .nickel(coin.getNickel())
