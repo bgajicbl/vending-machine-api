@@ -1,5 +1,7 @@
 package com.bojan.vending.controller;
 
+import com.bojan.vending.data.RoleFactory;
+import com.bojan.vending.data.UserDTOFactory;
 import com.bojan.vending.dto.UserDto;
 import com.bojan.vending.model.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,16 +40,7 @@ class UserControllerTest {
 
     @Test
     void register()throws Exception{
-        Role role = Role.builder()
-                .id(1)
-                .name("ROLE_ADMIN")
-                .build();
-        UserDto userDto = UserDto.builder()
-                .username("test_user")
-                .password("test")
-                .enabled(true)
-                .roles(Set.of(role))
-                .build();
+        UserDto userDto = UserDTOFactory.createWithoutId();
 
         MvcResult createResult = this.mockMvc
                 .perform(post("/api/v1/user/register")

@@ -12,7 +12,7 @@ import javax.validation.constraints.Positive;
 public class BuyRequest {
 
     @Positive
-    private int productId;
+    private long productId;
     @Positive
     private int amount;
 

@@ -1,9 +1,12 @@
 package com.bojan.vending.service;
 
+import com.bojan.vending.dto.AuthRequest;
 import com.bojan.vending.dto.UserDto;
 import com.bojan.vending.model.Role;
 
 public interface UserService {
+
+    String login(AuthRequest request);
 
     UserDto register(UserDto userDto);
 

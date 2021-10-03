@@ -8,19 +8,19 @@ import com.bojan.vending.exception.AmountNotSufficientException;
 import com.bojan.vending.exception.EntityNotFoundException;
 import com.bojan.vending.model.Product;
 import com.bojan.vending.model.User;
-import com.bojan.vending.repository.CoinRepository;
 import com.bojan.vending.repository.ProductRepository;
 import com.bojan.vending.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
+@Log
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final CoinRepository coinRepository;
 
     @Override
     public int deposit(CoinDto coinDto, String username) {
@@ -29,6 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
         int total = user.getDeposit() + CoinMapper.calculateTotal(coinDto);
         user.setDeposit(total);
         userRepository.save(user);
+        log.info("Deposit added by user: " + username);
+
         return total;
     }
 
@@ -38,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found with username:" + username));
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with ID:" + request.getProductId()));
+
         if (product.getAmountAvailable() < request.getAmount()) {
             throw new AmountNotSufficientException("Not sufficient amount of product with ID: " + request.getProductId());
         }
@@ -60,7 +63,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         user.setDeposit(0);
         userRepository.save(user);
-
+        log.info("Product: " + product.getProductName() + "  bought by user: " + username);
         return response;
     }
 
@@ -71,6 +74,8 @@ public class TransactionServiceImpl implements TransactionService {
         CoinDto change = calculateChange(user.getDeposit(), 0);
         user.setDeposit(0);
         userRepository.save(user);
+        log.info("Reset operation by user: " + username);
+
         return change;
     }
 

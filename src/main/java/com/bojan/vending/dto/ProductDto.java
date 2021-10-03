@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDto {
 
-    private Integer id;
+    private long id;
 
     @NotEmpty
     private String productName;

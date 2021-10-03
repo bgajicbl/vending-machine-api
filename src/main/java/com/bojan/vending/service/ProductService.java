@@ -6,7 +6,7 @@ public interface ProductService {
 
     ProductDto create(ProductDto productDto, String username);
 
-    ProductDto findProductById(int id);
+    ProductDto findProductById(long id);
 
-    void deleteProduct(int id);
+    void deleteProduct(int id, String username);
 }

@@ -5,7 +5,6 @@ import com.bojan.vending.model.User;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
